@@ -29,7 +29,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::058264068861:role/GitHubActionsECRRole
-          aws-region: ap-south-1
+          aws-region: us-east-1
 
       - name: Check AWS identity
         run: aws sts get-caller-identity
