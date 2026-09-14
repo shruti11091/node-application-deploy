@@ -31,14 +31,12 @@ jobs:
           role-to-assume: arn:aws:iam::058264068861:role/GitHubActionsECRRole
           aws-region: ap-south-1
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::058264068861:role/GitHubActionsECRRole
-          aws-region: ap-south-1
-
       - name: Check AWS identity
         run: aws sts get-caller-identity
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
         run: docker build -t node-app .
