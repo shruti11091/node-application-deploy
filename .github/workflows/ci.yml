@@ -40,3 +40,12 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t node-app .
+     
+      - name: Tag and push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: node-application
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker tag node-app $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
