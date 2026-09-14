@@ -25,6 +25,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Debug OIDC claims
+        uses: github/actions-oidc-debugger@main
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::058264068861:role/GitHubActionsECRRole
+          aws-region: ap-south-1
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
